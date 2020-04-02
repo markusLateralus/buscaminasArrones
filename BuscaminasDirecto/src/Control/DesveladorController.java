@@ -9,14 +9,14 @@ import vista.ElementoGrafico;
 
 public class DesveladorController {
 
-	Tablero tablero;
+	static Tablero tablero;
 ElementoGrafico elementoGrafico;
 
-	public DesveladorController(Tablero tablero) {
+	public DesveladorController(int lado, int numeroBombas) {
 		super();
-		this.tablero = tablero;
+		//this.tablero = tablero;
 		//elementoGrafico=new ElementoGrafico();
-	
+		tablero=Tablero.getTablero(lado, numeroBombas);
 	}
 
 	// El Controller tambien hace de Adaptador
@@ -34,7 +34,7 @@ ElementoGrafico elementoGrafico;
 //	}
 	
 	public ElementoGrafico[][] getEntornoGrafico() {
-		return ConversorGrafico.convertir(tablero.getCasillas());
+		return ConversorGrafico.convertir(Tablero.getCasillas());
 	}
 	/*
 	public ElementoGrafico getElementoGrafico(Coordenada coordenada) {
