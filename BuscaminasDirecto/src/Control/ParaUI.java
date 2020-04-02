@@ -10,9 +10,10 @@ import vista.UserInterface;
 
 public class ParaUI extends UserInterface{
 	DesveladorController desveladorController;
-	//Tablero tablero;
+	
 	
 	public ParaUI() {
+		
 		
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -32,7 +33,6 @@ public class ParaUI extends UserInterface{
 		//La parte de los datos
 		int lado = getDificultad().getLado();
 		//tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
-		//Tablero.getTablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
 		desveladorController = new DesveladorController(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
 		Botonera botonera = new Botonera(lado, desveladorController);
 		
