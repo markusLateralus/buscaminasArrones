@@ -10,29 +10,23 @@ import vista.UserInterface;
 
 public class ParaUI extends UserInterface{
 	DesveladorController desveladorController;
-	Tablero tablero;
 	
+	 int lado = getDificultad().getLado();
 	public ParaUI() {
-		
+	
+		desveladorController = new DesveladorController(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
+
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cargarJuego();
 			}
 		});
+		
 	}
 
 	private void cargarJuego() {
-		// Tenemos que crear una nueva botonera
-		// Entonces es un evento de UI
-		// Tambien hay que crear un nuevo tablero?
-		// Entonces es un evento de informacion
-		// Por lo tanto este evento va en el paraUI
-		// meterBotonera ss
 		
-		//La parte de los datos
-		int lado = getDificultad().getLado();
-		tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
-		desveladorController = new DesveladorController(tablero);
+		//tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
 		Botonera botonera = new Botonera(lado, desveladorController);
 		
 		//La parte del UI

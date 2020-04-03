@@ -8,7 +8,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 import Control.DesveladorController;
+import Control.ParaUI;
 import model.Coordenada;
+import utiles.ConversorGrafico;
+import utiles.Utiles;
 
 public class Botonera extends JPanel{
 	DesveladorController desveladorController;
@@ -21,17 +24,18 @@ public class Botonera extends JPanel{
 			
 			if(SwingUtilities.isLeftMouseButton(e)) {
 				desveladorController.desvelarCasilla(boton.getName());
+				desveladorController.comprobarVictoria();
 			}
 			if (SwingUtilities.isRightMouseButton(e)) {
 				// queremos marcar
 			}
-			//Al estar dentro de la botonera (el objeto)
 			actualizaBotonera(desveladorController.getEntornoGrafico());
 		}
 	};
 	
 	public Botonera(int lado, DesveladorController desveladorController) {
 		this.desveladorController=desveladorController;
+		
 		// TODO el nombre para cuando hay mas de 10 de lado.
 		// debe ser de dos digitos por coordenada aunque el valor<10
 		// es decir la coordenada 6:11 debe ser 06:11, por ejemplo.
@@ -54,6 +58,7 @@ public class Botonera extends JPanel{
 			JButton boton = (JButton)components[i];
 			Coordenada coordenada=obtenCoordenada(boton.getName());
 			ElementoGrafico elementoGrafico = elementos[coordenada.getPosX()][coordenada.getPosY()];
+	//		ConversorGrafico.getCasilla(elementos, elementoGrafico);
 			if(!elementoGrafico.isOcultado()) {
 				boton.setText(String.valueOf(elementoGrafico.getValor()));
 			}else if(elementoGrafico.isSenalada()){

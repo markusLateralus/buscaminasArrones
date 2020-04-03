@@ -14,5 +14,20 @@ public class ConversorGrafico {
 		}
 		return elementos;
 	}
+	
+	public static void getCasilla(ElementoGrafico[][] elementos,ElementoGrafico elementoGrafico ) {
+		Casilla casilla;
+		for (int i = 0; i < elementos.length; i++) {
+			for (int j = 0; j < elementos.length; j++) {
+				if(elementos[i][j].equals(elementoGrafico)) {
+				//	0Casilla casilla=elementoGrafico.getValor();
+					System.out.println(elementoGrafico.getValor());
+					//return casilla;
+				}
+			}
+			
+			}
+		
+	}
 
 }
