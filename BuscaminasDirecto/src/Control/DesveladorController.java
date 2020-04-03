@@ -2,8 +2,10 @@ package Control;
 
 import model.Casilla;
 import model.Coordenada;
+import model.Densidad;
 import model.Tablero;
 import utiles.ConversorGrafico;
+import utiles.Utiles;
 import vista.Botonera;
 import vista.ElementoGrafico;
 
@@ -40,8 +42,10 @@ ElementoGrafico elementoGrafico;
 	public ElementoGrafico getElementoGrafico(Coordenada coordenada) {
 		return ConversorGrafico.getElementoGrafico(tablero.getCasillas(), coordenada);
 	}
-	public Casilla getCasilla(Coordenada coordenada) {
-		return ConversorGrafico.getCasilla(tablero.getCasillas(), coordenada);
-	}
 	*/
+	public void comprobarVictoria() {
+		Tablero.comprobarVictoria();
+	}
+
+	
 }

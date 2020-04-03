@@ -2,6 +2,7 @@ package model;
 
 import javax.swing.JOptionPane;
 
+
 import utiles.Utiles;
 
 public class Tablero {
@@ -10,6 +11,7 @@ public class Tablero {
 	private static int lado;
 	private static int numeroBombas;                                      
 	public static Tablero tablero=null;
+	public static boolean victoria=false;
 	
 	private Tablero(int lado, int numeroBombas) {
 		super();
@@ -24,7 +26,7 @@ public class Tablero {
 		return tablero;
 	}
 
-	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
+	private static void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
 		for (int i = 0; i < 8; i++) {
 			Coordenada alrededor = posicionMinaCoordenada.creaCoordenadaAlrededor(i);
 			if (validaCoordenada(alrededor)) {
@@ -40,13 +42,14 @@ public class Tablero {
 				&& posicion.getPosY() < getLado();
 	}
 
-	private void setMinasAlrededor(Coordenada coordenada) {
+	private static void setMinasAlrededor(Coordenada coordenada) {
 		casillas[coordenada.getPosX()][coordenada.getPosY()]
 				.setMinasAlrededor(casillas[coordenada.getPosX()][coordenada.getPosY()].getMinasAlrededor() + 1);
 	}
 
-	private void colocarMinas(int lado, int numeroMinas) { // aleatorio
+	private static int colocarMinas(int lado, int numeroMinas) { // aleatorio
 		// TODO ?
+		numeroBombas=numeroMinas;
 		for (int i = 0; i < numeroMinas;) {
 			Coordenada posicion = new Coordenada(Utiles.dameNumero(getLado()), Utiles.dameNumero(getLado()));
 			if (!isMina(posicion)) {
@@ -57,6 +60,7 @@ public class Tablero {
 
 			}
 		}
+		return numeroBombas;
 
 	}
 
@@ -86,9 +90,15 @@ public class Tablero {
 
 	public static void desvelarCasilla2(Coordenada coordenada) {//solucionado
 		Casilla casilla = getCasilla(coordenada);
+		 final int contadorVictoria=1;
+		 int contador=0;
 		casilla.setVelada(false);
 		casilla.setMarcada(true);
+		
 		if(casilla.isMina()==false) {
+	
+			contador++;
+		
 		for (int i = 0; i < 8; i++) {
 			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
 			if (validaCoordenada(alrededor)) {
@@ -96,9 +106,11 @@ public class Tablero {
 				if (contarMinasAlrededor(alrededor) == 0) {
 				if (casillaAlrededor.isVelada() && casillaAlrededor.isMarcada() == false
 					&& casillaAlrededor.isMina() == false) {
+					contador++;
 					casillaAlrededor.setVelada(false);
 					casillaAlrededor.setMarcada(true);
 			
+					
 					desvelarCasilla2(alrededor);
 				
 				}
@@ -106,18 +118,45 @@ public class Tablero {
 			}
 		}
 		}
+	
 		}else {
 			perderPartida();
-			tablero.getTablero(lado, numeroBombas);
+		
 			
 		}
 
 	}
 
-	private static void perderPartida() {
+public static void comprobarVictoria() {
+	
+	int contador=0;
+	int total=(Tablero.lado * Tablero.lado) - (Tablero.numeroBombas);
+	for(int i = 0; i < Tablero.lado; i++) {
+		for(int j = 0; j < Tablero.lado; j++) {
+			Casilla casilla=Tablero.getCasilla(new Coordenada(i,j));
+			
+			if(!casilla.isVelada()) {
+				contador++;
+			}
+		}
+	}
+	if(contador==total){
+		Tablero.victoria=true;
+		gano();
+	}
+
+	}
+private static void gano() {
+		JOptionPane.showMessageDialog(null, "has ganado");
+	}
+	
+
+	private static Tablero perderPartida() {
 		JOptionPane.showMessageDialog(null, "has perdido");
 		
-		
+		Tablero.getTablero(lado, numeroBombas);
+		 Tablero.colocarMinas(lado, numeroBombas);
+		 return tablero;
 		
 	}
 	public void reiniciarPartida() {
@@ -125,7 +164,7 @@ public class Tablero {
 	}
 
 	public boolean marcarCasilla(Coordenada coordenada) {
-		Casilla casilla = this.getCasilla(coordenada);
+		Casilla casilla = Tablero.getCasilla(coordenada);
 		return casilla.marcar();
 
 	}
@@ -135,7 +174,7 @@ public class Tablero {
 	}
 
 	public void crearTablero(int lado) {
-		this.casillas = new Casilla[lado][lado];
+		Tablero.casillas = new Casilla[lado][lado];
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas[i].length; j++) {
 				casillas[i][j] = new Casilla(); // creando cada casilla del tablero
@@ -154,11 +193,11 @@ public class Tablero {
 
 	}
 
-	private void setMina(Coordenada posicion, boolean bandera) { // cambiamos la propiedad Mina de la casilla
+	private static void setMina(Coordenada posicion, boolean bandera) { // cambiamos la propiedad Mina de la casilla
 		getCasilla(posicion).setMina(bandera);
 	}
 
-	private boolean isMina(Coordenada posicion) { // preguntamos si la casilla con dicha coordenada es mina??
+	private static boolean isMina(Coordenada posicion) { // preguntamos si la casilla con dicha coordenada es mina??
 		return getCasilla(posicion).isMina();
 	}
 
