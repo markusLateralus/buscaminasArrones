@@ -11,34 +11,43 @@ public class ParaUI extends UserInterface{
 	DesveladorController desveladorController;
 	FinalizadorController finalizadorController;
 	IniciadorController iniciadorController;
-	
-	 int lado = getDificultad().getLado();
-	
+	 int lado ;
+	 int minas;
 	public ParaUI() {
-		 int minas=Utiles.calculaMinas(lado, getDensidad().getPorcentaje());
-		iniciadorController=new IniciadorController();
-		iniciadorController.iniciarJuego( lado, minas);
-		 desveladorController = new DesveladorController(lado, minas);
-		
-		finalizadorController=new FinalizadorController();
+	//	lado= getDificultad().getLado();
+		//minas=Utiles.calculaMinas(lado, getDensidad().getPorcentaje());
+		//iniciadorController=new IniciadorController(lado, minas);
+		finalizadorController=new FinalizadorController();		
+		jugar();
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cargarJuego();
+				reiniciar();
+			
 			}
 		});
 		
 	}
-
-	private void cargarJuego() {
-		
-		//tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
-
-		
-		//La parte del UI
-		getHuecoBotonera().removeAll();
+	private void jugar() {
+		lado= getDificultad().getLado();
+		minas=Utiles.calculaMinas(lado, getDensidad().getPorcentaje());
+		iniciadorController=new IniciadorController(lado, minas);
+	//	iniciadorController.iniciarJuego(getDensidad(), getDificultad());
+		desveladorController = new DesveladorController(lado, minas);
 		Botonera botonera = new Botonera(lado, desveladorController, finalizadorController);
 		getHuecoBotonera().add(botonera);
-		// Obliga al redibujado del ui cuando hay cambio de tamano de la ventana
-		//pack();
+		
+	}
+
+	private void reiniciar() {
+		lado= getDificultad().getLado();
+		minas=Utiles.calculaMinas(lado, getDensidad().getPorcentaje());		
+		//La parte del UI
+		iniciadorController=new IniciadorController(lado, minas);
+		iniciadorController.reiniciarJuego(getDensidad(), getDificultad());
+		getHuecoBotonera().removeAll();
+		desveladorController = new DesveladorController(lado, minas);
+		Botonera botonera = new Botonera(lado, desveladorController, finalizadorController);
+		getHuecoBotonera().add(botonera);	
+		pack();
 	}
 }

@@ -12,4 +12,8 @@ public class FinalizadorController {
 	public void comprobarVictoria() {
 		Tablero.comprobarVictoria();
 	}
+	
+	public void mostrarCasillasBombas() {
+	//	return Botonera.mostrarCasillasBombas();
+	}
 }

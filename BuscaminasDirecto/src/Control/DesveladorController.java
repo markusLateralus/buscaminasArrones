@@ -16,15 +16,14 @@ ElementoGrafico elementoGrafico;
 
 	public DesveladorController(int lado, int numeroBombas) {
 		super();
-		tablero=Tablero.getTablero(lado, numeroBombas);
+		//this.tablero = tablero;
+		//elementoGrafico=new ElementoGrafico();
+		//tablero=Tablero.getTablero(lado, numeroBombas);
 	}
-
-	// El Controller tambien hace de Adaptador
-	// entre el UI que me da x, y
-	// y el tablero que usa Coordenada
 	
 	public void desvelarCasilla(String nombre) {
 		Coordenada coordenada=Botonera.obtenCoordenada(nombre);
+		
 		  Tablero.desvelarCasilla2(coordenada);
 		  
 	}

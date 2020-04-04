@@ -140,6 +140,7 @@ public static void comprobarVictoria() {
 	}
 	if(contador==total){
 		gano();
+		Tablero.numeroBombas=0;
 	}
 
 	}
