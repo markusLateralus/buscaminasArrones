@@ -7,6 +7,9 @@ import utiles.Utiles;
 
 public class IniciadorController {
 	//HU1  reiniciarjuego
+	
+	
+	
 	public Tablero iniciarJuego(Densidad densidad,Dificultad dificultad) {
 		//return new Tablero(dificultad.getLado(), Utiles.calculaMinas(dificultad.getLado(), densidad.getPorcentaje()));
 	return Tablero.getTablero(dificultad.getLado(), Utiles.calculaMinas(dificultad.getLado(), densidad.getPorcentaje()));
@@ -14,6 +17,6 @@ public class IniciadorController {
 	
 
 	public Tablero reiniciarJuego(Densidad densidad, Dificultad dificultad) {
-		return iniciarJuego(densidad, dificultad);
+		return Tablero.getTablero(dificultad.getLado(), Utiles.calculaMinas(dificultad.getLado(), densidad.getPorcentaje()));
 	}
 }

@@ -16,8 +16,6 @@ ElementoGrafico elementoGrafico;
 
 	public DesveladorController(int lado, int numeroBombas) {
 		super();
-		//this.tablero = tablero;
-		//elementoGrafico=new ElementoGrafico();
 		tablero=Tablero.getTablero(lado, numeroBombas);
 	}
 
@@ -27,8 +25,7 @@ ElementoGrafico elementoGrafico;
 	
 	public void desvelarCasilla(String nombre) {
 		Coordenada coordenada=Botonera.obtenCoordenada(nombre);
-		
-		  tablero.desvelarCasilla2(coordenada);
+		  Tablero.desvelarCasilla2(coordenada);
 		  
 	}
 	//public void actualizaTodo() {
@@ -43,9 +40,7 @@ ElementoGrafico elementoGrafico;
 		return ConversorGrafico.getElementoGrafico(tablero.getCasillas(), coordenada);
 	}
 	*/
-	public void comprobarVictoria() {
-		Tablero.comprobarVictoria();
-	}
+
 
 	
 }

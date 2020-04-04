@@ -11,8 +11,6 @@ public class Tablero {
 	private static int lado;
 	private static int numeroBombas;                                      
 	public static Tablero tablero=null;
-	public static boolean victoria=false;
-	
 	private Tablero(int lado, int numeroBombas) {
 		super();
 		this.lado = lado;
@@ -141,7 +139,6 @@ public static void comprobarVictoria() {
 		}
 	}
 	if(contador==total){
-		Tablero.victoria=true;
 		gano();
 	}
 
