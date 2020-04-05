@@ -16,9 +16,6 @@ ElementoGrafico elementoGrafico;
 
 	public DesveladorController(int lado, int numeroBombas) {
 		super();
-		//this.tablero = tablero;
-		//elementoGrafico=new ElementoGrafico();
-		//tablero=Tablero.getTablero(lado, numeroBombas);
 	}
 	
 	public void desvelarCasilla(String nombre) {

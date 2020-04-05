@@ -2,23 +2,26 @@ package model;
 
 import javax.swing.JOptionPane;
 
-
 import utiles.Utiles;
 
 public class Tablero {
 
 	private static Casilla[][] casillas;
-	private static int lado;
-	private static int numeroBombas;                                      
-	public static Tablero tablero=null;
+	public static int lado;
+	private static int numeroBombas;
+	public static Tablero tablero = null;
+	public static boolean finPartida = false;
+
 	private Tablero(int lado, int numeroBombas) {
 		super();
 		this.lado = lado;
+		finPartida = false;
 		crearTablero(lado);
 		colocarMinas(lado, numeroBombas);
 	}
+
 	public static Tablero getTablero(int lado, int numeroBombas) {
-		if(tablero==null) {
+		if (tablero == null) {
 			new Tablero(lado, numeroBombas);
 		}
 		return tablero;
@@ -47,11 +50,13 @@ public class Tablero {
 
 	private static int colocarMinas(int lado, int numeroMinas) { // aleatorio
 		// TODO ?
-		numeroBombas=numeroMinas;
+		numeroBombas = numeroMinas;
+		int totalBombas[][] = new int[numeroMinas][numeroMinas];
 		for (int i = 0; i < numeroMinas;) {
 			Coordenada posicion = new Coordenada(Utiles.dameNumero(getLado()), Utiles.dameNumero(getLado()));
 			if (!isMina(posicion)) {
 				setMina(posicion, true);
+
 				i++;
 				establecerMinasAlrededor(posicion);
 				System.out.println("bomba:" + i + " " + posicion.getPosX() + posicion.getPosY());
@@ -60,6 +65,28 @@ public class Tablero {
 		}
 		return numeroBombas;
 
+	}
+
+	public static Coordenada[] getTodasCoordenadasMinas() {
+
+		// Casilla casillas[][]=new Casilla[Tablero.numeroBombas][Tablero.numeroBombas];
+		Coordenada coordenadas[] = new Coordenada[Tablero.numeroBombas];
+		int contador = 0;
+		for (int i = 0; i < Tablero.lado; i++) {
+			for (int j = 0; j < Tablero.lado; j++) {
+
+				Coordenada coordenada = new Coordenada(i, j);
+				Casilla casilla = Tablero.getCasilla(coordenada);
+				if (casilla.isMina() && contador < Tablero.numeroBombas) {
+
+					coordenadas[contador] = coordenada;
+					contador++;
+				}
+
+			}
+
+		}
+		return coordenadas;
 	}
 
 	private static int contarMinasAlrededor(Coordenada posicion) {
@@ -86,80 +113,79 @@ public class Tablero {
 				&& alrededor.getPosY() < lado;
 	}
 
-	public static void desvelarCasilla2(Coordenada coordenada) {//solucionado
+	public static void desvelarCasilla2(Coordenada coordenada) {// solucionado
 		Casilla casilla = getCasilla(coordenada);
-		 final int contadorVictoria=1;
-		 int contador=0;
+		final int contadorVictoria = 1;
+		int contador = 0;
 		casilla.setVelada(false);
 		casilla.setMarcada(true);
-		
-		if(casilla.isMina()==false) {
-	
+
+		if (casilla.isMina() == false) {
+
 			contador++;
-		
-		for (int i = 0; i < 8; i++) {
-			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
-			if (validaCoordenada(alrededor)) {
-				Casilla casillaAlrededor = getCasilla(alrededor);
-				if (contarMinasAlrededor(alrededor) == 0) {
-				if (casillaAlrededor.isVelada() && casillaAlrededor.isMarcada() == false
-					&& casillaAlrededor.isMina() == false) {
-					contador++;
-					casillaAlrededor.setVelada(false);
-					casillaAlrededor.setMarcada(true);
-			
-					
-					desvelarCasilla2(alrededor);
-				
+
+			for (int i = 0; i < 8; i++) {
+				Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
+				if (validaCoordenada(alrededor)) {
+					Casilla casillaAlrededor = getCasilla(alrededor);
+					if (contarMinasAlrededor(alrededor) == 0) {
+						if (casillaAlrededor.isVelada() && casillaAlrededor.isMarcada() == false
+								&& casillaAlrededor.isMina() == false) {
+							contador++;
+							casillaAlrededor.setVelada(false);
+							casillaAlrededor.setMarcada(true);
+
+							desvelarCasilla2(alrededor);
+
+						}
+
+					}
 				}
-
 			}
-		}
-		}
-	
-		}else {
+
+		} else {
 			perderPartida();
-		
-			
+
+
 		}
 
 	}
 
-public static void comprobarVictoria() {
-	
-	int contador=0;
-	int total=(Tablero.lado * Tablero.lado) - (Tablero.numeroBombas);
-	for(int i = 0; i < Tablero.lado; i++) {
-		for(int j = 0; j < Tablero.lado; j++) {
-			Casilla casilla=Tablero.getCasilla(new Coordenada(i,j));
-			
-			if(!casilla.isVelada()) {
-				contador++;
+	public static void comprobarVictoria() {
+		int contador = 0;
+		
+		Casilla casilla;
+		int total = (Tablero.lado * Tablero.lado) - (Tablero.numeroBombas);
+		for (int i = 0; i < Tablero.lado; i++) {
+			for (int j = 0; j < Tablero.lado; j++) {
+				casilla = Tablero.getCasilla(new Coordenada(i, j));
+
+				if (!casilla.isVelada()) {
+					contador++;
+				}
 			}
 		}
-	}
-	if(contador==total){
-		gano();
-		Tablero.numeroBombas=0;
-	}
+		if (contador == total) {
+
+			gano();
+			Tablero.numeroBombas = 0;
+			Tablero.finPartida = false;
+		}
 
 	}
-private static void gano() {
+
+	private static void gano() {
 		JOptionPane.showMessageDialog(null, "has ganado");
 	}
-	
 
-	private static Tablero perderPartida() {
+	private static void perderPartida() {
 		JOptionPane.showMessageDialog(null, "has perdido");
-		
-		Tablero.getTablero(lado, numeroBombas);
-		 Tablero.colocarMinas(lado, numeroBombas);
-		 return tablero;
-		
+		getTodasCoordenadasMinas();
+		Tablero.finPartida = true;
+
 	}
-	public void reiniciarPartida() {
-		
-	}
+
+
 
 	public boolean marcarCasilla(Coordenada coordenada) {
 		Casilla casilla = Tablero.getCasilla(coordenada);

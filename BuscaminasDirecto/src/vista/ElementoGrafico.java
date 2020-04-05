@@ -3,12 +3,14 @@ package vista;
 public class ElementoGrafico {
 	private boolean ocultado;
 	private boolean senalado;
+	public boolean bomba;
 	private int valor;
 	
-	public ElementoGrafico(boolean mostrada, boolean senalada, int valor) {
+	public ElementoGrafico(boolean mostrada, boolean senalada, boolean bomba, int valor) {
 		super();
 		this.ocultado = mostrada;
 		this.senalado = senalada;
+		this.bomba=bomba;
 		this.valor = valor;
 	}
 	public boolean isOcultado() {
@@ -19,5 +21,9 @@ public class ElementoGrafico {
 	}
 	public int getValor() {
 		return valor;
+	}
+	public boolean isBomba() {
+		// TODO Auto-generated method stub
+		return bomba;
 	}
 }

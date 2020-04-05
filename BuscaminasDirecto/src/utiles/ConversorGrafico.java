@@ -9,7 +9,7 @@ public class ConversorGrafico {
 		for (int i = 0; i < casilla.length; i++) {
 			for (int j = 0; j < casilla.length; j++) {
 				int valor = casilla[i][j].getMinasAlrededor();
-				elementos[i][j] = new ElementoGrafico(casilla[i][j].isVelada(), casilla[i][j].isMarcada(), valor);
+				elementos[i][j] = new ElementoGrafico(casilla[i][j].isVelada(), casilla[i][j].isMarcada(), casilla[i][j].isMina(), valor);
 			}
 		}
 		return elementos;
