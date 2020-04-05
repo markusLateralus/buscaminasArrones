@@ -14,9 +14,7 @@ public class ParaUI extends UserInterface{
 	 int lado ;
 	 int minas;
 	public ParaUI() {
-	//	lado= getDificultad().getLado();
-		//minas=Utiles.calculaMinas(lado, getDensidad().getPorcentaje());
-		//iniciadorController=new IniciadorController(lado, minas);
+
 		finalizadorController=new FinalizadorController();		
 		jugar();
 		btnReiniciar.addActionListener(new ActionListener() {
@@ -31,7 +29,7 @@ public class ParaUI extends UserInterface{
 		lado= getDificultad().getLado();
 		minas=Utiles.calculaMinas(lado, getDensidad().getPorcentaje());
 		iniciadorController=new IniciadorController(lado, minas);
-	//	iniciadorController.iniciarJuego(getDensidad(), getDificultad());
+		iniciadorController.iniciarJuego(getDensidad(), getDificultad());
 		desveladorController = new DesveladorController(lado, minas);
 		Botonera botonera = new Botonera(lado, desveladorController, finalizadorController);
 		getHuecoBotonera().add(botonera);

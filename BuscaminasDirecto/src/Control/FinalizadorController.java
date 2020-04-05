@@ -12,9 +12,7 @@ public class FinalizadorController {
 		Tablero.comprobarVictoria();
 	}
 	
-	public Coordenada[] getTodasCoordenadasBombas() {
-	return Tablero.getTodasCoordenadasMinas();
-	}
+
 	
 	
 }

@@ -24,6 +24,12 @@ ElementoGrafico elementoGrafico;
 		  Tablero.desvelarCasilla2(coordenada);
 		  
 	}
+	
+	public Coordenada[] getTodasCoordenadasBombas() {
+	return Tablero.getTodasCoordenadasMinas();
+	}
+	
+	
 	//public void actualizaTodo() {
 		//botonera.actualizarBotonera(ConversorGrafico.convertir(tablero.getCasillas()));
 //	}
