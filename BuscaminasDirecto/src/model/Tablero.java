@@ -14,7 +14,7 @@ public class Tablero {
 
 	private Tablero(int lado, int numeroBombas) {
 		super();
-		this.lado = lado;
+		Tablero.lado = lado;
 		finPartida = false;
 		crearTablero(lado);
 		colocarMinas(lado, numeroBombas);
@@ -27,13 +27,11 @@ public class Tablero {
 		return tablero;
 	}
 
-	private static void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
+	public static void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
 		for (int i = 0; i < 8; i++) {
 			Coordenada alrededor = posicionMinaCoordenada.creaCoordenadaAlrededor(i);
 			if (validaCoordenada(alrededor)) {
 				setMinasAlrededor(alrededor);
-				// System.out.println("bombas alrededor " + alrededor.getPosX() +
-				// alrededor.getPosY());
 			}
 		}
 	}
@@ -51,12 +49,10 @@ public class Tablero {
 	private static int colocarMinas(int lado, int numeroMinas) { // aleatorio
 		// TODO ?
 		numeroBombas = numeroMinas;
-		int totalBombas[][] = new int[numeroMinas][numeroMinas];
 		for (int i = 0; i < numeroMinas;) {
 			Coordenada posicion = new Coordenada(Utiles.dameNumero(getLado()), Utiles.dameNumero(getLado()));
 			if (!isMina(posicion)) {
 				setMina(posicion, true);
-
 				i++;
 				establecerMinasAlrededor(posicion);
 				System.out.println("bomba:" + i + " " + posicion.getPosX() + posicion.getPosY());
@@ -68,17 +64,13 @@ public class Tablero {
 	}
 
 	public static Coordenada[] getTodasCoordenadasMinas() {
-
-		// Casilla casillas[][]=new Casilla[Tablero.numeroBombas][Tablero.numeroBombas];
 		Coordenada coordenadas[] = new Coordenada[Tablero.numeroBombas];
 		int contador = 0;
 		for (int i = 0; i < Tablero.lado; i++) {
 			for (int j = 0; j < Tablero.lado; j++) {
-
 				Coordenada coordenada = new Coordenada(i, j);
 				Casilla casilla = Tablero.getCasilla(coordenada);
 				if (casilla.isMina() && contador < Tablero.numeroBombas) {
-
 					coordenadas[contador] = coordenada;
 					contador++;
 				}
@@ -96,9 +88,7 @@ public class Tablero {
 		for (int i = x - 1; i < x + 1; i++) { // (x-1,y-1)esquina izquierda superior,
 			for (int j = y - 1; j < y + 1; j++) { // (x+1,y+1) esquina inferior derecha
 				Coordenada alrededor = new Coordenada(i, j);
-				// No tengo en cuenta la posicion que estoy comprobando
 				if (!alrededor.equals(posicion)) {
-					// está la posicion dentro del tablero?? la posicion es mina??
 					if (isDentroLimites(alrededor, lado) && getCasilla(alrededor).isMina()) {
 						bombasAlrededor++;
 					}
@@ -108,22 +98,17 @@ public class Tablero {
 		return bombasAlrededor;
 	}
 
-	private static boolean isDentroLimites(Coordenada alrededor, int lado) {
+	public static boolean isDentroLimites(Coordenada alrededor, int lado) {
 		return alrededor.getPosX() >= 0 && alrededor.getPosX() < lado && alrededor.getPosY() >= 0
 				&& alrededor.getPosY() < lado;
 	}
 
-	public static void desvelarCasilla2(Coordenada coordenada) {// solucionado
+	public static void desvelarCasilla2(Coordenada coordenada) {
 		Casilla casilla = getCasilla(coordenada);
-		final int contadorVictoria = 1;
-		int contador = 0;
 		casilla.setVelada(false);
 		casilla.setMarcada(true);
 
 		if (casilla.isMina() == false) {
-
-			contador++;
-
 			for (int i = 0; i < 8; i++) {
 				Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
 				if (validaCoordenada(alrededor)) {
@@ -131,7 +116,6 @@ public class Tablero {
 					if (contarMinasAlrededor(alrededor) == 0) {
 						if (casillaAlrededor.isVelada() && casillaAlrededor.isMarcada() == false
 								&& casillaAlrededor.isMina() == false) {
-							contador++;
 							casillaAlrededor.setVelada(false);
 							casillaAlrededor.setMarcada(true);
 
@@ -146,14 +130,13 @@ public class Tablero {
 		} else {
 			perderPartida();
 
-
 		}
 
 	}
 
 	public static void comprobarVictoria() {
 		int contador = 0;
-		
+
 		Casilla casilla;
 		int total = (Tablero.lado * Tablero.lado) - (Tablero.numeroBombas);
 		for (int i = 0; i < Tablero.lado; i++) {
@@ -184,8 +167,6 @@ public class Tablero {
 		Tablero.finPartida = true;
 
 	}
-
-
 
 	public boolean marcarCasilla(Coordenada coordenada) {
 		Casilla casilla = Tablero.getCasilla(coordenada);

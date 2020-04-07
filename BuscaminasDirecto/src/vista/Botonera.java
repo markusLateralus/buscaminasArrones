@@ -10,7 +10,7 @@ import javax.swing.*;
 
 import Control.DesveladorController;
 import Control.FinalizadorController;
-import model.Casilla;
+
 import model.Coordenada;
 import model.Tablero;
 
@@ -49,14 +49,26 @@ public class Botonera extends JPanel {
 		// debe ser de dos digitos por coordenada aunque el valor<10
 		// es decir la coordenada 6:11 debe ser 06:11, por ejemplo.
 		setLayout(new GridLayout(lado, lado, 0, 0));
+		String nombre;
 		for (int filas = 0; filas < lado; filas++) {
 			for (int columnas = 0; columnas < lado; columnas++) {
 				JButton boton = new JButton();
-				String nombre = Integer.toString(filas) + Integer.toString(columnas);
-				boton.setName(nombre);
-				add(boton);
+				if(filas>9 || columnas>9) {
+					 nombre= Integer.toString(0)+ Integer.toString(filas) +Integer.toString(0)+ Integer.toString(columnas);
+					boton.setName(nombre);
+					add(boton);
+					boton.addMouseListener(miMouseAdapter);
+				}
+				else{
+					nombre = Integer.toString(filas) + Integer.toString(columnas);
+					boton.setName(nombre);
+					add(boton);
+					boton.addMouseListener(miMouseAdapter);
+				}
+			
+				
 				// Esta linea ahora usar el adapter interno
-				boton.addMouseListener(miMouseAdapter);
+			
 			}
 		}
 	}

@@ -11,7 +11,7 @@ class TableroTest {
 	private int lado;
 	private int porcentaje;
 	private int minas;
-	private Tablero tablero;
+	private static Tablero tablero;
 
 	// SE ejecuta antes de cada una de las pruebas
 	@BeforeEach
@@ -19,7 +19,7 @@ class TableroTest {
 		lado = 4;
 		porcentaje = 10;
 		minas = Utiles.calculaMinas(lado, porcentaje);
-		tablero = new Tablero(lado, minas);
+		Tablero.getTablero(lado, minas);
 	}
 	@Test
 	void testIncrementarMinasAlrededor() {
@@ -27,9 +27,9 @@ class TableroTest {
 		int posY=0;
 		int lado=4;
 		Coordenada miMinaCoordenada=new Coordenada(posX, posY);
-		Tablero tablero=new Tablero();
-		tablero.getCasilla(miMinaCoordenada).setMina(true);
-		tablero.establecerMinasAlrededor(miMinaCoordenada);
+	
+		Tablero.getCasilla(miMinaCoordenada).setMina(true);
+		Tablero.establecerMinasAlrededor(miMinaCoordenada);
 		int resultado[][]= {
 				{0,1,0,0},
 				{1,1,0,0},
@@ -40,8 +40,8 @@ class TableroTest {
 		posX=3;
 		posY=3;
 		miMinaCoordenada=new Coordenada(posX, posY);
-		tablero.getCasilla(miMinaCoordenada).setMina(true);
-		tablero.establecerMinasAlrededor(miMinaCoordenada);
+		Tablero.getCasilla(miMinaCoordenada).setMina(true);
+		Tablero.establecerMinasAlrededor(miMinaCoordenada);
 		int resultadoDos[][]= {
 				{0,1,0,0},
 				{1,1,0,0},
@@ -52,7 +52,7 @@ class TableroTest {
 	}
 
 	private void probando(Tablero tablero, int[][] resultado) {
-		Casilla[][] casillas = tablero.getCasillas();
+		Casilla[][] casillas = Tablero.getCasillas();
 		for (int i = 0; i < casillas.length; i++) {
 			for (int j = 0; j < casillas.length; j++) {
 				assertEquals(resultado[i][j],casillas[i][j].getMinasAlrededor());
@@ -67,7 +67,7 @@ class TableroTest {
 		for (int i = 0; i < lado; i++) {
 			for (int j = 0; j < lado; j++) {
 				Coordenada posicion = new Coordenada(i, j);
-				Casilla casilla = tablero.getCasilla(posicion);
+				Casilla casilla = Tablero.getCasilla(posicion);
 				String letrero;
 				if (casilla.isVelada()) {
 					letrero = "#";
@@ -101,10 +101,10 @@ class TableroTest {
 		do {
 			do {
 				Coordenada posicion=new Coordenada(i,j);
-				Casilla actual=tablero.getCasilla(posicion);
+				Casilla actual=Tablero.getCasilla(posicion);
 				mostrarTablero();
 				if(!actual.isMina() && actual.getMinasAlrededor()==0 && actual.isVelada()) {
-					tablero.desvelarCasilla(posicion);
+					Tablero.desvelarCasilla2(posicion);
 					error=comprobarDesvelo();//sino es false continua con la ejecucion
 				}
 				mostrarTablero();
@@ -126,7 +126,7 @@ class TableroTest {
 	do {
 		do {
 			Coordenada posicion=new Coordenada(i,j);
-			Casilla actual=tablero.getCasilla(posicion);
+			Casilla actual=Tablero.getCasilla(posicion);
 			if(actual.getMinasAlrededor()==0 && !actual.isVelada()) {
 				error=desveladasAroundMe(posicion);
 			}
@@ -143,8 +143,8 @@ class TableroTest {
 		boolean error=false;
 		for(int i=0; i<8 && !error; i++) {
 			Coordenada alrededor=posicion.creaCoordenadaAlrededor(i);
-			if(tablero.isDentroLimites(alrededor)) {
-				Casilla actual=tablero.getCasilla(alrededor);
+			if(Tablero.isDentroLimites(alrededor, lado)) {
+				Casilla actual=Tablero.getCasilla(alrededor);
 				if(!posicion.equals(actual)) {
 					error=actual.isVelada();
 				}

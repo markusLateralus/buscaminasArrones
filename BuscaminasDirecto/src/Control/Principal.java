@@ -2,7 +2,6 @@ package Control;
 
 import java.awt.EventQueue;
 
-import vista.UserInterface;
 
 public class Principal {
 	public static void main(String[] args) {
