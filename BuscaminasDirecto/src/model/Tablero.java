@@ -105,6 +105,9 @@ public class Tablero {
 
 	public static void desvelarCasilla2(Coordenada coordenada) {
 		Casilla casilla = getCasilla(coordenada);
+		if (casilla.isVelada() && casilla.isMarcada() == false) {
+			
+		
 		casilla.setVelada(false);
 		casilla.setMarcada(true);
 
@@ -122,6 +125,7 @@ public class Tablero {
 							desvelarCasilla2(alrededor);
 
 						}
+					
 
 					}
 				}
@@ -130,6 +134,9 @@ public class Tablero {
 		} else {
 			perderPartida();
 
+		}
+		}	else {
+			
 		}
 
 	}
@@ -168,7 +175,7 @@ public class Tablero {
 
 	}
 
-	public boolean marcarCasilla(Coordenada coordenada) {
+	public static boolean marcarCasilla(Coordenada coordenada) {
 		Casilla casilla = Tablero.getCasilla(coordenada);
 		return casilla.marcar();
 

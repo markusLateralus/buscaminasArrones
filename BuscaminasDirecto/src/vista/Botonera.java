@@ -10,13 +10,14 @@ import javax.swing.*;
 
 import Control.DesveladorController;
 import Control.FinalizadorController;
-
+import Control.MarcadorController;
 import model.Coordenada;
 import model.Tablero;
 
 public class Botonera extends JPanel {
 	DesveladorController desveladorController;
 	FinalizadorController finalizadorController;
+	MarcadorController marcadorController;
 
 	MouseAdapter miMouseAdapter = new MouseAdapter() {
 		@Override
@@ -26,11 +27,20 @@ public class Botonera extends JPanel {
 
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				desveladorController.desvelarCasilla(boton.getName());
+				boolean posibleBomba=marcadorController.marcarCasilla(boton.getName());
+				if(posibleBomba) {
+					boton.setEnabled(false);
+				}
 				finalizadorController.comprobarVictoria();
+			
 
 			}
 			if (SwingUtilities.isRightMouseButton(e)) {
 				// queremos marcar
+				boolean posibleBomba=marcadorController.marcarCasilla(boton.getName());
+				if(posibleBomba==false) {
+					actualizaBotonera(desveladorController.getEntornoGrafico());
+				}
 			}
 
 			actualizaBotonera(desveladorController.getEntornoGrafico());
@@ -41,9 +51,10 @@ public class Botonera extends JPanel {
 		}
 	};
 
-	public Botonera(int lado, DesveladorController desveladorController, FinalizadorController finalizador) {
+	public Botonera(int lado, DesveladorController desveladorController, FinalizadorController finalizador, MarcadorController marcador) {
 		this.desveladorController = desveladorController;
 		this.finalizadorController = finalizador;
+		this.marcadorController=marcador;
 
 		// TODO el nombre para cuando hay mas de 10 de lado.
 		// debe ser de dos digitos por coordenada aunque el valor<10
