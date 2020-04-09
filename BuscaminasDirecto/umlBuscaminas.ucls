@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="vista.UserInterface" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/vista/UserInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="378" y="119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="vista.ElementoGrafico" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/vista/ElementoGrafico.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="789" y="452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="vista.Botonera" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/vista/Botonera.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="672" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="Control.Principal" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/Control/Principal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="87" x="334" y="10"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="Control.ParaUI" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/Control/ParaUI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="372" y="202"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="Control.DesveladorController" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/Control/DesveladorController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="699" y="300"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Control.FinalizadorController" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/Control/FinalizadorController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="452" y="294"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="Control.IniciadorController" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/Control/IniciadorController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="221" y="294"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="model.Tablero" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/model/Tablero.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="283" y="427"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="model.Casilla" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/model/Casilla.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="87" x="58" y="471"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="model.Coordenada" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/model/Coordenada.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="379" y="510"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <enumeration id="12" language="java" name="model.Densidad" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/model/Densidad.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="109" y="158"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="13" language="java" name="model.Dificultad" project="BuscaminasDirecto" 
+    file="/BuscaminasDirecto/src/model/Dificultad.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="62" y="33"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </enumeration>  
+  <association id="14">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="15" name="desveladorController"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="18" name="tablero"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="21" name="iniciadorController"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="24" name="finalizadorController"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="27" name="finalizadorController"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="30">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="31" name="tablero"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="34" name="casillas"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="37" name="densidad"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="40" name="tablero"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="43" name="tablero"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="46" name="dificultad"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="49" name="desveladorController"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="52" name="elementoGrafico"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

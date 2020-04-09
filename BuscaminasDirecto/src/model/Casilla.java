@@ -12,6 +12,9 @@ public class Casilla {
 	public Casilla() {
 		
 	}
+	public Casilla(boolean ocultado, boolean senalado, boolean bomba) {
+		// TODO Auto-generated constructor stub
+	}
 	public boolean isMina() {
 		return mina;
 	}
@@ -42,14 +45,11 @@ public class Casilla {
 	}
 	
 	public boolean marcar() {
-		boolean retorno=false;
+	//	boolean retorno=false;
 		
-		if(this.isVelada()) {
-			this.setMarcada(!this.isMarcada());
-			return true;
-		}
-		return retorno;
-		
+		boolean marcada= this.isMarcada();
+		this.setMarcada(!marcada);
+			return  this.isMarcada();
 		
 	}
 	

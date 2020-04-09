@@ -15,19 +15,29 @@ public class ConversorGrafico {
 		return elementos;
 	}
 	
-	public static void getCasilla(ElementoGrafico[][] elementos,ElementoGrafico elementoGrafico ) {
-		Casilla casilla;
-		for (int i = 0; i < elementos.length; i++) {
-			for (int j = 0; j < elementos.length; j++) {
-				if(elementos[i][j].equals(elementoGrafico)) {
-				//	0Casilla casilla=elementoGrafico.getValor();
-					System.out.println(elementoGrafico.getValor());
-					//return casilla;
-				}
-			}
-			
-			}
+	public static ElementoGrafico getElementoGrafico(Casilla casilla) {
+		int valor=casilla.getMinasAlrededor();
+		ElementoGrafico elemento= new ElementoGrafico(casilla.isVelada(),casilla.isMarcada(), casilla.isMina(),valor);
+					return elemento;
+				
 		
 	}
+	
+	
+	
+	public static Casilla [][] convertirAcasillas(	ElementoGrafico elementos[][]) {
+		Casilla casillas[][] = new Casilla[elementos.length][elementos.length];
+		for (int i = 0; i < elementos.length; i++) {
+			for (int j = 0; j < elementos.length; j++) {
+			//	int valor = elementos[i][j].getMinasAlrededor();
+				casillas[i][j] = new Casilla(elementos[i][j].isOcultado(), elementos[i][j].isSenalado(), elementos[i][j].isBomba());
+			}
+		}
+		return casillas;
+	}
+	
+	
+	
+	
 
 }

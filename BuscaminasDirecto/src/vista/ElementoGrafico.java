@@ -16,9 +16,19 @@ public class ElementoGrafico {
 	public boolean isOcultado() {
 		return ocultado;
 	}
-	public boolean isSenalada() {
+	public boolean isSenalado() {
 		return senalado;
 	}
+	public void setSenalado(boolean senalado) {
+		this.senalado = senalado;
+	}
+	public void setOcultado(boolean ocultado) {
+		this.ocultado = ocultado;
+	}
+	public void setBomba(boolean bomba) {
+		this.bomba = bomba;
+	}
+
 	public int getValor() {
 		return valor;
 	}

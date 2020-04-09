@@ -103,40 +103,69 @@ public class Tablero {
 				&& alrededor.getPosY() < lado;
 	}
 
-	public static void desvelarCasilla2(Coordenada coordenada) {
-		Casilla casilla = getCasilla(coordenada);
-		if (casilla.isVelada() && casilla.isMarcada() == false) {
-			
-		
-		casilla.setVelada(false);
-		casilla.setMarcada(true);
+	public static void comprobarCasillaSospechosa(Coordenada coordenada) {
 
-		if (casilla.isMina() == false) {
-			for (int i = 0; i < 8; i++) {
-				Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
-				if (validaCoordenada(alrededor)) {
-					Casilla casillaAlrededor = getCasilla(alrededor);
-					if (contarMinasAlrededor(alrededor) == 0) {
-						if (casillaAlrededor.isVelada() && casillaAlrededor.isMarcada() == false
-								&& casillaAlrededor.isMina() == false) {
-							casillaAlrededor.setVelada(false);
-							casillaAlrededor.setMarcada(true);
+		Casilla casilla = Tablero.getCasilla(coordenada);
+		int totalMinasAlrededor = casilla.getMinasAlrededor();
+		Coordenada[] coordenadas = new Coordenada[8];
+		for (int i = 0; i < 8; i++) {
+			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
+			if (validaCoordenada(alrededor)) {
+				Casilla casillaAlrededor = Tablero.getCasilla(alrededor);
+				coordenadas[i] = alrededor;
+			}
+		}
 
-							desvelarCasilla2(alrededor);
-
-						}
-					
-
-					}
-				}
+		for (int i = 0; i < coordenadas.length; i++) {
+			if (casilla.isMina() && casilla.isMarcada() && casilla.isVelada()) {
+				perderPartida();
 			}
 
-		} else {
-			perderPartida();
+			if (casilla.isMarcada() && casilla.isMina() == false) {
+				desvelarCasilla2(coordenadas[i]);
+			}
 
 		}
-		}	else {
-			
+
+	}
+
+	public static void desvelarCasilla2(Coordenada coordenada) {
+		Casilla casilla = getCasilla(coordenada);
+		if (casilla.getMinasAlrededor() == 0 && casilla.isVelada() && casilla.isMarcada() == false) {
+
+			casilla.setVelada(false);
+			casilla.setMarcada(true);
+
+			if (casilla.isMina() == false) {
+				for (int i = 0; i < 8; i++) {
+					Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
+					if (validaCoordenada(alrededor)) {
+						Casilla casillaAlrededor = getCasilla(alrededor);
+						if (contarMinasAlrededor(alrededor) == 0) {
+							if (casillaAlrededor.isVelada() && casillaAlrededor.isMarcada() == false
+									&& casillaAlrededor.isMina() == false) {
+								casillaAlrededor.setVelada(false);
+								casillaAlrededor.setMarcada(true);
+
+								desvelarCasilla2(alrededor);
+
+							}
+
+						}
+					}
+				}
+
+			} else {
+				perderPartida();
+
+			}
+		} else if(casilla.getMinasAlrededor()>0 && casilla.isVelada() && casilla.isMarcada() == false ){
+
+			casilla.setVelada(false);
+			casilla.setMarcada(true);
+			if(casilla.isMina()) {
+				perderPartida();
+			}
 		}
 
 	}
@@ -221,8 +250,9 @@ public class Tablero {
 		return getCasilla(posicion).isVelada();
 	}
 
-	public int getMinasAlrededor(Coordenada posicion) {// me dice cuantas minas alrdedor tiene la casilla con dicha
-														// coordenada
+	public static int getMinasAlrededor(Coordenada posicion) {// me dice cuantas minas alrdedor tiene la casilla con
+																// dicha
+		// coordenada
 		return getCasilla(posicion).getMinasAlrededor();
 	}
 
@@ -231,4 +261,158 @@ public class Tablero {
 
 	}
 
+	public static Coordenada[] getTodasCoordenadasMarcadas(Coordenada coordenada) {
+		// TODO Auto-generated method stub
+		Casilla casilla = Tablero.getCasilla(coordenada);
+		int totalCasillasMarcadas = casilla.getMinasAlrededor();
+		Coordenada coordenadas[] = new Coordenada[totalCasillasMarcadas];
+		int contador = 0;
+		for (int i = 0; i < 8; i++) {
+			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
+			if (validaCoordenada(alrededor)) {
+				Casilla casilla2 = Tablero.getCasilla(alrededor);
+				if (!alrededor.equals(coordenada)) {
+					if (casilla.isMarcada() && contador < totalCasillasMarcadas) {
+						coordenadas[contador] = alrededor;
+						contador++;
+					}
+
+				}
+			}
+
+		}
+		return coordenadas;
+
+	}
+
+	public static Casilla[] getTodasCoordenadasAlrededor(Coordenada coordenada) {
+		Casilla casillas[] = new Casilla[8];
+		for (int i = 0; i < casillas.length; i++) {
+			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
+			if (validaCoordenada(alrededor)) {
+				Casilla casilla = Tablero.getCasilla(alrededor);
+				casillas[i] = casilla;
+			}
+		}
+
+		return casillas;
+	}
+
+	public static int getMinasAlrededor(Casilla casilla) {
+		// TODO Auto-generated method stub
+		return casilla.getMinasAlrededor();
+	}
+
+	public static Coordenada getCoordenada(Casilla casilla) {
+
+		for (int i = 0; i < Tablero.lado; i++) {
+			for (int j = 0; j < Tablero.lado; j++) {
+				Coordenada coordenadaAuxiliar = new Coordenada(i, j);
+				Casilla casillaAuxiliar = Tablero.getCasilla(coordenadaAuxiliar);
+
+				if (casillaAuxiliar == casilla) {
+					return coordenadaAuxiliar;
+				}
+			}
+		}
+		return null;
+	}
+
+	public static boolean isVisibleTodasCasillasAlrededor(Casilla[] casillas) {
+		boolean visible = true;
+		int contador = 0;
+		for (int i = 0; i < casillas.length; i++) {
+			if (casillas[i].isVelada()) {
+				contador++;
+				visible = true;
+				return visible;
+			}
+		}
+		if (contador == 0) {
+			visible = false;
+			return visible;
+		}
+		return visible;
+	}
+
+	public static boolean isMarcadasTodasCasillasAlrededor(Casilla[] casillas) {
+		// TODO Auto-generated method stub
+		boolean marcadas = false;
+		int contador = 0;
+		for (int i = 0; i < casillas.length; i++) {
+			if (casillas[i].isMarcada()) {
+				contador++;
+				marcadas = true;
+				return marcadas;
+			}
+		}
+		if (contador == 0) {
+			marcadas = false;
+			return marcadas;
+		}
+		return marcadas;
+	}
+
+	public static Coordenada[] getCoordenadas(Casilla[] casillas) {
+
+		Coordenada[] coordenadas = new Coordenada[casillas.length];
+		for (int i = 0; i < Tablero.lado; i++) {
+			for (int j = 0; j < Tablero.lado; j++) {
+				Coordenada coordenadaAuxiliar = new Coordenada(i, j);
+				Casilla casillaAuxiliar = Tablero.getCasilla(coordenadaAuxiliar);
+				for (int k = 0; k < casillas.length; k++) {
+					Casilla casillaIntermedia = casillas[k];
+					if (casillaAuxiliar.equals(casillaIntermedia)) {
+						coordenadas[k] = coordenadaAuxiliar;
+					}
+				}
+			}
+		}
+		return coordenadas;
+	}
+
+	public static void desvelarCasillas(Casilla[] casillas) {
+		for (int i = 0; i < Tablero.lado; i++) {
+			for (int j = 0; j < Tablero.lado; j++) {
+				Coordenada coordenada = new Coordenada(i, j);
+				Casilla casilla=Tablero.getCasilla(coordenada);
+				for (int k = 0; k < casillas.length; k++) {
+					Casilla casillaAuxiliar=casillas[k];
+					if(casillaAuxiliar.equals(casilla)) {
+						
+						casillaAuxiliar.setVelada(false);
+						casillaAuxiliar.setMarcada(true);
+						if (casillaAuxiliar.isMina()) {
+							perderPartida();
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	public static Casilla[] getTodasCasillasMarcadasAlrededor(Casilla casilla) {
+		// TODO Auto-generated method stub
+		int totalCasillasMarcadas = casilla.getMinasAlrededor();
+		Casilla casillas[] = new Casilla[totalCasillasMarcadas];
+		Coordenada coordenada=Tablero.getCoordenada(casilla);
+		int contador = 0;
+		for (int i = 0; i < 8; i++) {
+			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
+			if (validaCoordenada(alrededor)) {
+				Casilla casilla2 = Tablero.getCasilla(alrededor);
+				if (!alrededor.equals(coordenada)) {
+					if (casilla.isMarcada() && contador < totalCasillasMarcadas) {
+						casillas[contador] = casilla2;
+						contador++;
+					}
+
+				}
+			}
+
+		}
+		return casillas;
+		
+	}
 }

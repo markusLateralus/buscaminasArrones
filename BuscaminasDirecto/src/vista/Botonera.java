@@ -11,39 +11,88 @@ import javax.swing.*;
 import Control.DesveladorController;
 import Control.FinalizadorController;
 import Control.MarcadorController;
+import model.Casilla;
 import model.Coordenada;
 import model.Tablero;
+import utiles.ConversorGrafico;
 
 public class Botonera extends JPanel {
 	DesveladorController desveladorController;
 	FinalizadorController finalizadorController;
 	MarcadorController marcadorController;
-
+	Casilla[] casillas;
+	Casilla casillaMaestra;
+	Casilla casillaAuxiliar;
+	String nombreBoton;
 	MouseAdapter miMouseAdapter = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			super.mouseClicked(e);
 			JButton boton = ((JButton) e.getSource());
-
-			if (SwingUtilities.isLeftMouseButton(e)) {
-				desveladorController.desvelarCasilla(boton.getName());
-				boolean posibleBomba=marcadorController.marcarCasilla(boton.getName());
-				if(posibleBomba) {
-					boton.setEnabled(false);
-				}
-				finalizadorController.comprobarVictoria();
 			
-
-			}
-			if (SwingUtilities.isRightMouseButton(e)) {
-				// queremos marcar
-				boolean posibleBomba=marcadorController.marcarCasilla(boton.getName());
-				if(posibleBomba==false) {
-					actualizaBotonera(desveladorController.getEntornoGrafico());
+			if (SwingUtilities.isLeftMouseButton(e)) {
+			    casillaMaestra=desveladorController.getCasilla(boton.getName());
+			    nombreBoton=boton.getName();	
+				casillas=marcadorController.getTodasCasillasAlrededor(boton.getName());	
+				Casilla [] casillasMarcadas=marcadorController.getTodasCasillasMarcadasAlrededor(casillaMaestra);
+			
+				if(casillasMarcadas.length==0 && casillasMarcadas.length==casillaMaestra.getMinasAlrededor()) {
+					desveladorController.desvelarCasilla(boton.getName());
+					finalizadorController.comprobarVictoria();	
+				}
+				else if(casillasMarcadas.length==casillaMaestra.getMinasAlrededor()){
+					desveladorController.desvelarCasillas(casillasMarcadas);
+					finalizadorController.comprobarVictoria();
 				}
 			}
+			
+			if (SwingUtilities.isRightMouseButton(e)) {
+				Casilla casilla=marcadorController.getCasilla(boton.getName());
+				int minasAlrededor=marcadorController.getMinasAlrededor(boton.getName());
+				Casilla casillasSospechosas[]=new Casilla[minasAlrededor];
+				int contador=0;			
+				if(minasAlrededor>0) {				
+					for (int i = 0; i < casillas.length; i++) {
+						Casilla casillaAuxiliar=casillas[i];
+						if(contador<=minasAlrededor) {
+						if(casillaAuxiliar.equals(casilla)){
+							casillasSospechosas[contador]=casillaAuxiliar;
+							//boolean casillaMarcada=marcadorController.marcar(boton.getName());
+							//ponerBanderaCasilla(boton,casillaMarcada);
+							if(contador<minasAlrededor) {
+								contador++;
+							}
+							
+							}
+						
+						}
+					}
+					if(contador==minasAlrededor) {
+								
+							System.out.println("dos veces");
+							if (SwingUtilities.isLeftMouseButton(e)) {
+							if(nombreBoton.equalsIgnoreCase(boton.getName())){
+								desveladorController.desvelarCasillas(casillasSospechosas);
+								finalizadorController.comprobarVictoria();
+							}
+							}
+					
+						}
+					
+					
+				}else {
+					boolean casillaMarcada=marcadorController.marcar(boton.getName());
+					ponerBanderaCasilla(boton,casillaMarcada);
+				}
+			
+				
+			//boolean casillaMarcada=marcadorController.marcar(boton.getName());
+			//ponerBanderaCasilla(boton,casillaMarcada);
+			
+				
+			}
 
-			actualizaBotonera(desveladorController.getEntornoGrafico());
+			actualizaBotonera(desveladorController.convertirAelementosGraficos());
 			if (Tablero.finPartida) {
 				mostrarCasillaBomba();
 			}
@@ -94,8 +143,8 @@ public class Botonera extends JPanel {
 				boton.setText(String.valueOf(elementoGrafico.getValor()));
 				this.cambiarColorValorBoton(Integer.parseInt(boton.getText()), boton);
 
-			} else if (elementoGrafico.isSenalada()) {
-				boton.setText("X");
+			} else if (elementoGrafico.isSenalado()) {
+				//ponerBanderaCasilla(boton);
 			} else {
 				boton.setText("");
 			}
@@ -103,6 +152,20 @@ public class Botonera extends JPanel {
 		}
 	}
 
+	
+	private void ponerBanderaCasilla(JButton boton, boolean casillaMarcada) {
+		ImageIcon imagen=new ImageIcon(getClass().getResource("/imagenes/bandera.jpg"));
+		if(casillaMarcada) {
+			boton.setIcon(imagen);
+		}
+		else {
+			boton.setIcon(null);
+			
+		}
+
+		
+	}
+	
 	private void cambiarColorValorBoton(int valor, JButton boton) {
 
 		if (valor == 0) {
