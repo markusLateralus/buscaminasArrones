@@ -71,7 +71,7 @@ public class Botonera extends JPanel {
 								contador++;
 							}
 							
-							
+							//ss
 							}
 						
 						}
