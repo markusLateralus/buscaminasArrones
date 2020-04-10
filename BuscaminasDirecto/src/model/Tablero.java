@@ -204,8 +204,8 @@ public class Tablero {
 
 	}
 
-	public static boolean marcarCasilla(Coordenada coordenada) {
-		Casilla casilla = Tablero.getCasilla(coordenada);
+	public static boolean marcarCasilla(Casilla casilla) {
+		
 		return casilla.marcar();
 
 	}
@@ -392,27 +392,24 @@ public class Tablero {
 
 	}
 
-	public static Casilla[] getTodasCasillasMarcadasAlrededor(Casilla casilla) {
+	public static Casilla[] getTodasCasillasMarcadasAlrededor(Casilla[] casillas) {
 		// TODO Auto-generated method stub
-		int totalCasillasMarcadas = casilla.getMinasAlrededor();
-		Casilla casillas[] = new Casilla[totalCasillasMarcadas];
-		Coordenada coordenada=Tablero.getCoordenada(casilla);
-		int contador = 0;
-		for (int i = 0; i < 8; i++) {
-			Coordenada alrededor = coordenada.creaCoordenadaAlrededor(i);
-			if (validaCoordenada(alrededor)) {
-				Casilla casilla2 = Tablero.getCasilla(alrededor);
-				if (!alrededor.equals(coordenada)) {
-					if (casilla.isMarcada() && contador < totalCasillasMarcadas) {
-						casillas[contador] = casilla2;
-						contador++;
-					}
+		int contador=0;
+		Casilla casillasAuxiliares[] = new Casilla[contador];
+		for (int i = 0; i < casillas.length; i++) {
+			Casilla casilla2 = casillas[i];
+			if (casilla2.isMarcada() && casillas.length==0) {
+				casillasAuxiliares[contador] = casilla2;
 
-				}
+					}
+			else if(casilla2.isMarcada()&& casillas.length>0) {
+				casillasAuxiliares[contador] = casilla2;
+				contador++;
 			}
 
-		}
-		return casillas;
+				}
+				
+		return casillasAuxiliares;
 		
 	}
 }

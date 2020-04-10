@@ -21,68 +21,70 @@ public class Botonera extends JPanel {
 	FinalizadorController finalizadorController;
 	MarcadorController marcadorController;
 	Casilla[] casillas;
+	Casilla [] casillasMarcadas;
 	Casilla casillaMaestra;
 	Casilla casillaAuxiliar;
 	String nombreBoton;
+	String nombreBotonAuxiliar;
 	MouseAdapter miMouseAdapter = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			super.mouseClicked(e);
 			JButton boton = ((JButton) e.getSource());
-			
+		    nombreBoton=boton.getName();	
+		  //  System.out.println(nombreBoton );
 			if (SwingUtilities.isLeftMouseButton(e)) {
 			    casillaMaestra=desveladorController.getCasilla(boton.getName());
-			    nombreBoton=boton.getName();	
+			    nombreBotonAuxiliar=boton.getName();	
+
 				casillas=marcadorController.getTodasCasillasAlrededor(boton.getName());	
-				Casilla [] casillasMarcadas=marcadorController.getTodasCasillasMarcadasAlrededor(casillaMaestra);
-			
-				if(casillasMarcadas.length==0 && casillasMarcadas.length==casillaMaestra.getMinasAlrededor()) {
-					desveladorController.desvelarCasilla(boton.getName());
-					finalizadorController.comprobarVictoria();	
+			casillasMarcadas=marcadorController.getTodasCasillasMarcadasAlrededor(casillas);
+		System.out.println(casillasMarcadas.length);
+				if( marcadorController.getTodasCasillasMarcadasAlrededor(casillas)==null) {
+				    System.out.println("tamanao" + marcadorController.getTodasCasillasMarcadasAlrededor(casillas));
 				}
-				else if(casillasMarcadas.length==casillaMaestra.getMinasAlrededor()){
+				else if(casillasMarcadas.length==0) {
+					desveladorController.desvelarCasilla(boton.getName());
+					finalizadorController.comprobarVictoria();
+				}
+				else if(casillasMarcadas.length>0){
+					
+					
 					desveladorController.desvelarCasillas(casillasMarcadas);
 					finalizadorController.comprobarVictoria();
 				}
 			}
 			
 			if (SwingUtilities.isRightMouseButton(e)) {
-				Casilla casilla=marcadorController.getCasilla(boton.getName());
-				int minasAlrededor=marcadorController.getMinasAlrededor(boton.getName());
-				Casilla casillasSospechosas[]=new Casilla[minasAlrededor];
+				Casilla casillaMarcada=marcadorController.getCasilla(boton.getName());
+				boolean bandera=marcadorController.marcar(casillaMarcada);
+				ponerBanderaCasilla(boton,bandera);
+				int minasAlrededor=marcadorController.getMinasAlrededor(casillaMaestra);
 				int contador=0;			
+				
 				if(minasAlrededor>0) {				
-					for (int i = 0; i < casillas.length; i++) {
+					for (int i = 0; i < casillasMarcadas.length; i++) {
 						Casilla casillaAuxiliar=casillas[i];
-						if(contador<=minasAlrededor) {
-						if(casillaAuxiliar.equals(casilla)){
-							casillasSospechosas[contador]=casillaAuxiliar;
-							//boolean casillaMarcada=marcadorController.marcar(boton.getName());
-							//ponerBanderaCasilla(boton,casillaMarcada);
+						if(contador<=casillasMarcadas.length) {
+						if(casillaAuxiliar.equals(casillaMarcada)){
 							if(contador<minasAlrededor) {
 								contador++;
 							}
+							
 							
 							}
 						
 						}
 					}
 					if(contador==minasAlrededor) {
-								
-							System.out.println("dos veces");
-							if (SwingUtilities.isLeftMouseButton(e)) {
-							if(nombreBoton.equalsIgnoreCase(boton.getName())){
-								desveladorController.desvelarCasillas(casillasSospechosas);
-								finalizadorController.comprobarVictoria();
-							}
-							}
+							
 					
 						}
 					
 					
 				}else {
-					boolean casillaMarcada=marcadorController.marcar(boton.getName());
-					ponerBanderaCasilla(boton,casillaMarcada);
+					bandera=marcadorController.marcar(casillaMarcada);
+					ponerBanderaCasilla(boton,bandera);
 				}
 			
 				

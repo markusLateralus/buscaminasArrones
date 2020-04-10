@@ -27,9 +27,9 @@ public class MarcadorController {
 	}
 
 
-	public boolean marcar(String nombre) {
-		Coordenada coordenada=Botonera.obtenCoordenada(nombre);
-		return Tablero.marcarCasilla(coordenada);
+	public boolean marcar(Casilla casilla) {
+	//	Coordenada coordenada=Botonera.obtenCoordenada(nombre);
+		return Tablero.marcarCasilla(casilla);
 		
 	}
 
@@ -41,10 +41,10 @@ public class MarcadorController {
 	}
 
 
-	public int getMinasAlrededor(String nombre) {
+	public int getMinasAlrededor(Casilla casillaMaestra) {
 		// TODO Auto-generated method stub
-		Coordenada coordenada=Botonera.obtenCoordenada(nombre);
-		return Tablero.getMinasAlrededor(coordenada);
+		//Coordenada coordenada=Botonera.obtenCoordenada(casillaMaestra);
+		return Tablero.getMinasAlrededor(casillaMaestra);
 	}
 
 
@@ -54,9 +54,9 @@ public class MarcadorController {
 	}
 
 
-	public Casilla[] getTodasCasillasMarcadasAlrededor(Casilla casillaMaestra) {
+	public Casilla[] getTodasCasillasMarcadasAlrededor(Casilla[] casillas) {
 		// TODO Auto-generated method stub
-		return Tablero.getTodasCasillasMarcadasAlrededor(casillaMaestra);
+		return Tablero.getTodasCasillasMarcadasAlrededor(casillas);
 	}
 }
 
