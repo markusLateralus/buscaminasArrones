@@ -1,5 +1,5 @@
 package model;
-
+ 
 import javax.swing.JOptionPane;
 
 import utiles.Utiles;
@@ -372,44 +372,59 @@ public class Tablero {
 	}
 
 	public static void desvelarCasillas(Casilla[] casillas) {
+		Casilla casillaAuxiliar=null;
 		for (int i = 0; i < Tablero.lado; i++) {
 			for (int j = 0; j < Tablero.lado; j++) {
 				Coordenada coordenada = new Coordenada(i, j);
 				Casilla casilla=Tablero.getCasilla(coordenada);
 				for (int k = 0; k < casillas.length; k++) {
-					Casilla casillaAuxiliar=casillas[k];
+					 casillaAuxiliar=casillas[k];
 					if(casillaAuxiliar.equals(casilla)) {
 						
 						casillaAuxiliar.setVelada(false);
 						casillaAuxiliar.setMarcada(true);
-						if (casillaAuxiliar.isMina()) {
-							perderPartida();
-						}
+					
 					}
 				}
 			}
 		}
-
+		if (casillaAuxiliar.isMina()) {
+			perderPartida();
+		}
 	}
 
 	public static Casilla[] getTodasCasillasMarcadasAlrededor(Casilla[] casillas) {
 		// TODO Auto-generated method stub
 		int contador=0;
+		if(casillas.length>0 ) {
+
+		for (int i = 0; i < casillas.length; i++) {
+			Casilla casilla2 = casillas[i];
+			if (casilla2.isMarcada()) {
+				contador++;
+			}
+			else {
+				
+			}
+					}
+		
+		
+	}
+		
 		Casilla casillasAuxiliares[] = new Casilla[contador];
 		for (int i = 0; i < casillas.length; i++) {
 			Casilla casilla2 = casillas[i];
-			if (casilla2.isMarcada() && casillas.length==0) {
-				casillasAuxiliares[contador] = casilla2;
-
-					}
-			else if(casilla2.isMarcada()&& casillas.length>0) {
-				casillasAuxiliares[contador] = casilla2;
-				contador++;
+			if (casilla2.isMarcada()) {
+				for (int j = 0; j < casillasAuxiliares.length; j++) {
+					casillasAuxiliares[j] = casilla2;
+					
+				}
 			}
+			
 
 				}
 				
 		return casillasAuxiliares;
-		
+
 	}
 }
